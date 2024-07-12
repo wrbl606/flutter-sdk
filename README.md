@@ -12,7 +12,7 @@ Copy and paste the following snippet into your action's `.yml` file.
 
 ```yaml
   - name: Install Flutter
-    uses: monterail/flutter-action@v1
+    uses: monterail/flutter-action@v2
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ With Flutter SDK for GitHub Actions you can do the following:
 
 ```yaml
 steps:
-  - uses: monterail/flutter-action@v1
+  - uses: monterail/flutter-action@v2
   - run: flutter build ...
 ```
 
@@ -32,6 +32,7 @@ steps:
 | Name | Description | Default |
 | --- | --- | --- |
 | `channel` | Flutter [channel](https://github.com/flutter/flutter/wiki/Flutter-build-release-channels) | `stable` |
+| `precache` | `flutter precache` arguments list, see [recipe](#precache-web-and-android-build-tools) | no-op |
 
 ## Recipes
 
@@ -56,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - uses: monterail/flutter-action@v1
+        - uses: monterail/flutter-action@v2
         - run: flutter pub get
         - uses: invertase/github-action-dart-analyzer@v3
           with:
@@ -86,7 +87,39 @@ jobs:
     runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - uses: monterail/flutter-action@v1
+        - uses: monterail/flutter-action@v2
+        - run: flutter pub get
+        - run: flutter build web
+        - uses: actions/upload-artifact@v4
+          with:
+            name: web-app
+            path: build/web
+```
+
+</details>
+
+### Precache web and Android build tools
+
+By default Flutter will fetch the tools necessary to build specific platforms after `flutter build` command is ran. The process can be sped up with precaching specific platforms at Flutter installation stage.
+
+<details>
+
+```yaml
+name: Setup Flutter for web and Android builds
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: monterail/flutter-action@v2
+          with:
+            precache: "--web --android"
         - run: flutter pub get
         - run: flutter build web
         - uses: actions/upload-artifact@v4
