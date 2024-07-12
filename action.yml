@@ -13,6 +13,6 @@ runs:
   using: 'composite'
   steps:
     - run: chmod +x $GITHUB_ACTION_PATH/install-flutter-sdk.rb
-      shell: ruby
+      shell: bash
     - run: $GITHUB_ACTION_PATH/install-flutter-sdk.rb --channel ${{ inputs.channel }}
-      shell: ruby
+      shell: bash
