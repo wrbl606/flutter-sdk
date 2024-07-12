@@ -13,7 +13,7 @@ channel = options[:channel] || 'stable'
 flutter_path = File.join(ENV['GITHUB_ACTION_PATH'], 'flutter')
 flutter_repo_address = "https://github.com/flutter/flutter.git"
 
-# `git clone -b #{channel} #{flutter_repo_address} #{flutter_path}`
+`git clone -b #{channel} #{flutter_repo_address} #{flutter_path}`
 
 flutter_bin_path = File.join(flutter_path, 'bin')
 dart_bin_path = File.join(flutter_path, 'bin', 'cache', 'dart-sdk', 'bin')
