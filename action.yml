@@ -12,7 +12,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: chmod +x $GITHUB_ACTION_PATH/install-flutter-sdk.sh
-      shell: bash
-    - run: $GITHUB_ACTION_PATH/install-flutter-sdk.sh -c ${{ inputs.channel }}
-      shell: bash
+    - run: chmod +x $GITHUB_ACTION_PATH/install-flutter-sdk.rb
+      shell: ruby
+    - run: $GITHUB_ACTION_PATH/install-flutter-sdk.rb --channel ${{ inputs.channel }}
+      shell: ruby

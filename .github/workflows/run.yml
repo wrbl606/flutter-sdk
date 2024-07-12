@@ -18,3 +18,15 @@ jobs:
     - uses: ./
     - run: flutter --version
     - run: dart pub global activate git_helper && git_helper -h
+  test-beta-install:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ./
+      with: 
+        channel: 'beta'
+    - run: flutter --version
+    - run: dart pub global activate git_helper && git_helper -h
