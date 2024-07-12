@@ -19,5 +19,5 @@ git clone -b "$CHANNEL" https://github.com/flutter/flutter.git "$FLUTTER_PATH"
 } >> "$GITHUB_PATH"
 
 if [ -z ${PRECACHE+x} ]; then
-  flutter precache $PRECACHE
+  $FLUTTER_PATH/bin precache $PRECACHE
 fi
