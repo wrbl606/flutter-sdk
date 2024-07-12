@@ -9,8 +9,9 @@ while getopts 'c:p:' param; do
   esac
 done
 
-FLUTTER_PATH="$GITHUB_ACTION_PATH/flutter"
+FLUTTER_PATH=$(join_path "$GITHUB_ACTION_PATH flutter")
 git clone -b "$CHANNEL" https://github.com/flutter/flutter.git "$FLUTTER_PATH"
+
 
 {
   echo "$FLUTTER_PATH/bin"
@@ -20,5 +21,5 @@ git clone -b "$CHANNEL" https://github.com/flutter/flutter.git "$FLUTTER_PATH"
 } >> "$GITHUB_PATH"
 
 if [[ $PRECACHE != "no" ]]; then
-  $FLUTTER_PATH/bin precache $PRECACHE
+  $FLUTTER_PATH/bin/flutter precache $PRECACHE
 fi
