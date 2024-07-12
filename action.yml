@@ -1,6 +1,6 @@
 name: 'Install Flutter SDK'
 description: 'Dart and Flutter CLIs available for your GitHub Action'
-author: 'Marcin Wróblewski'
+author: 'Marcin Wróblewski, Monterail Sp. z o.o. (monterail.com)'
 branding:
   color: 'white'
   icon: 'download'
@@ -9,10 +9,14 @@ inputs:
     description: 'Desired Flutter channel'
     required: false
     default: 'stable'
+  precache:
+    description: 'Comma-separated platforms list to precache'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
     - run: chmod +x $GITHUB_ACTION_PATH/install-flutter-sdk.sh
       shell: bash
-    - run: $GITHUB_ACTION_PATH/install-flutter-sdk.sh -c ${{ inputs.channel }}
+    - run: $GITHUB_ACTION_PATH/install-flutter-sdk.sh -c ${{ inputs.channel }} -p ${{ inputs.precache }}
       shell: bash

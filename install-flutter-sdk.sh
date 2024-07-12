@@ -1,9 +1,10 @@
 #!/bin/bash
 
 CHANNEL="stable"
-while getopts 'v:c:' param; do
+while getopts 'c:p:' param; do
   case $param in
     c) CHANNEL="$OPTARG" ;;
+    p) PRECACHE="$OPTARG" ;;
   esac
 done
 
@@ -16,3 +17,7 @@ git clone -b "$CHANNEL" https://github.com/flutter/flutter.git "$FLUTTER_PATH"
   echo "$HOME/.pub-cache/bin" # POSIX
   echo "$LOCALAPPDATA\Pub\Cache\bin" # Windows
 } >> "$GITHUB_PATH"
+
+if [ -z ${PRECACHE+x} ]; then
+  flutter precache $PRECACHE
+fi
