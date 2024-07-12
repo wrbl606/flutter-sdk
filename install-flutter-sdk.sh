@@ -9,9 +9,8 @@ while getopts 'c:p:' param; do
   esac
 done
 
-FLUTTER_PATH=$(join_path "$GITHUB_ACTION_PATH flutter")
+FLUTTER_PATH="$GITHUB_ACTION_PATH/flutter"
 git clone -b "$CHANNEL" https://github.com/flutter/flutter.git "$FLUTTER_PATH"
-
 
 {
   echo "$FLUTTER_PATH/bin"
