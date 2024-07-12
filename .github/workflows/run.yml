@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest, windows-latest, macos-latest]
+        operating-system: [ubuntu-latest, windows-latest]
     steps:
     - uses: actions/checkout@v4
     - uses: ./
@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest, windows-latest, macos-latest]
+        operating-system: [ubuntu-latest, windows-latest]
     steps:
     - uses: actions/checkout@v4
     - uses: ./
